@@ -21,6 +21,25 @@ class usuario {
         $this->Endereco=$Endereco;
         $this->CEP=$CEP;
     }
+
+    public function testandoreservista() {
+        if ($this -> sexo == "Masculino"){
+            echo "Apresente seu certificado de reservista no tiro de guerra !\n";
+        } else {
+            echo "Tudo certo !\n";
+        }
+    }
+
+    public function casado($anos_casado) {
+        $EstadoCivil = $this -> EstadoCivil;
+        switch ($EstadoCivil) {
+            case "Casado":
+                echo "Parabéns pelo seu casamento de $anos_casado anos!\n";
+                break;
+            default: 
+                echo "oloco\n";
+        }
+    }
 }
 $usuario1 = new usuario(
     "Josenildo Afonso Souza",
@@ -52,4 +71,8 @@ $usuario3 = new usuario(
     "Piauí",
     "Estrada 3, 33",
     "12345-99");
+
+    $usuario1 -> testandoreservista();
+    $usuario2 -> testandoreservista();
+    $usuario1 -> casado(0);
 ?>
