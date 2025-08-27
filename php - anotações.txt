@@ -1,0 +1,23 @@
+$marca
+$modelo
+$ano
+|
+|
+3 variáveis --> forma bolo --> Classe --> objeto(carro)
+
+Atributos 
+public -->São atributos públicos que podem ser acessados de para de uma classe 
+private --> São atributos que acessados somente por dentro da classe
+getter --> método padrão para ler ou obter valores de um atributo privado.
+setter --> método padrão para alterar ou modificar valores de um atributo privado
+
+ucworlds --> Deixa toda as inciais Maiúsculas
+
+strlower --> Deixa todo o texto minúsculo
+
+preg_replace --> altera a estrutura de uma string
+pattern: /\D/--> significa qualquer caracter que não seja um digito
+
+(int) $variavel garante valor inteiro
+
+abs(variável) garante o numero positivo 
