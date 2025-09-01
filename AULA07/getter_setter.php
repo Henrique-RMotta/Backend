@@ -44,6 +44,17 @@ class pessoa {
     public function setIdade($idade){
         $this -> idade = abs((int)$idade);
     }
+    public function exibirDados(){
+        $nome = $this->nome;
+        $cpf = $this->cpf;
+        $telefone = $this->telefone;
+        $idade = $this->idade;
+        echo "Nome do aluno: $nome\n
+            CPF: $cpf\n
+            Telefone: $telefone\n
+            Idade: $idade\n
+            Email: ".$this->email. "\nSenha: ".$this->senha;
+        }
 }
 
 $aluno1 = new pessoa(
@@ -54,4 +65,6 @@ $aluno1 = new pessoa(
  "henrique@gmail.com",
  "12983");
 echo $aluno1->getNome();
+
+
 ?>

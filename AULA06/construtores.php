@@ -21,17 +21,17 @@ class produtosmercado {// criando classe
     }
 }
 //Criando objetos sem construtor feito
-$produto1 = new produtosmercado();
-$produto1 -> nome = "Suco Tang";
-$produto1 -> categoria = "Bebidas";
-$produto1 -> fornecedor = "Mondelez";
-$produto1 -> qtde_estoque = 200;
+// $produto1 = new produtosmercado();
+// $produto1 -> nome = "Suco Tang";
+// $produto1 -> categoria = "Bebidas";
+// $produto1 -> fornecedor = "Mondelez";
+// $produto1 -> qtde_estoque = 200;
 
-$produto2 = new produtosmercado();
-$produto2 -> nome = "Energético Monster";
-$produto2 -> categoria = "Bebidas";
-$produto2 -> fornecedor = "Coca-Cola";
-$produto2 -> qtde_estoque = 120;
+// $produto2 = new produtosmercado();
+// $produto2 -> nome = "Energético Monster";
+// $produto2 -> categoria = "Bebidas";
+// $produto2 -> fornecedor = "Coca-Cola";
+// $produto2 -> qtde_estoque = 120;
 
 
 //Criando objetos com construtor feito 
