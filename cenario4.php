@@ -26,8 +26,19 @@ class pessoas extends planetas{
 
 class Pessoa {
     public $nomePessoa; 
+    public function __construct($nomePessoa){
+        $this->setNomePessoa($nomePessoa); 
+    }
+
+    public function setNomePessoa($nomePessoa) {
+        $this -> nomePessoa = ucwords(strtolower($nomePessoa));
+    }
+
+    public function getNome() {
+        return $this-> nomePessoa;
+    }
     public function engravidar() {
-        echo "A {$this->nomePessoa} engrevidou";
+        echo "A {$this->nomePessoa} engravidou";
     }
 
     public function nascer(){

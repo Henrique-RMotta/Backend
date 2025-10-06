@@ -34,7 +34,17 @@ $Jornada -> chover();
 */
 
 class Personagem {
-    public $nomePersonagem; 
+    public String $nomePersonagem; 
+    public function __construct($nomePersonagem){
+        $this-> setNomePersonagem($nomePersonagem);
+    }
+
+    public function setNomePersonagem($nomePersonagem) {
+        $this-> nomePersonagem = ucwords(strtolower($nomePersonagem));
+    }
+    public function getNomePersonagem() {
+        return $this -> nomePersonagem;
+    }
     public function seguirJornada() {
         echo "O(a) {$this->nomePersonagem} seguiu a jornada";
     }
@@ -68,7 +78,16 @@ class Dificuldade {
 
 class Refeicao {
     public $nomeRefeicao;
+    public function __construct($nomeRefeicao){
+        $this -> setNomeRefeicao($nomeRefeicao);
+    }
+    public function setNomeRefeicao($nomeRefeicao){
+        $this -> nomeRefeicao = ucwords(strtolower($nomeRefeicao));
+    }
 
+    public function getNomeRefeicao(){
+        return $this-> nomeRefeicao;
+    }
     public function servir() {
         echo "A refeição {$this->nomeRefeicao} foi servida ";
     }

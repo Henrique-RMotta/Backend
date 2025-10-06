@@ -37,8 +37,17 @@ $Shopping -> nome = Shopping;
 
 
 class Heroi {
-    public $nomeHeroi; 
+    public String $nomeHeroi; 
 
+    public function __construct($nomeHeroi){
+        $this->setNomeHeroi($nomeHeroi);
+    }
+    public function setNomeHeroi($nomeHeroi) {
+        $this -> nomeHeroi = ucwords(strtolower($nomeHeroi));
+    }
+    public function getNomeHeroi() {
+        $this-> nomeHeroi;
+    }
     public function treinar() {
         echo "{$this->nomeHeroi} treinou.";
     }
@@ -62,7 +71,19 @@ class Missao {
 Missao::inciar(); 
 
 class LocalDeTreinamento {
-    public $nomeLocal; 
+    public String $nomeLocal; 
+
+    public function __construct($nomeLocal){
+        $this->setNomeLocal($nomeLocal);
+    }
+
+    public function setNomeLocal($nomeLocal) {
+        $this-> nomeLocal = ucwords(strtolower($nomeLocal));
+    }
+
+    public function getLocal() {
+        return $this -> nomeLocal;
+    }
     public function oferecerTreinamento() {
         echo "O treino foi oferecido no {$this->nomeLocal}";
     }
@@ -75,14 +96,34 @@ class Shopping {
 }
 
 class Brinquedo { 
-    public $tipoBrinquedo; 
-    public function getTipo() {
+    public String $tipoBrinquedo; 
+
+    public function __construct($tipoBrinquedo){
+        $this -> setNomeTipoBrinquedo($tipoBrinquedo);
+    }
+
+    public function setNomeTipoBrinquedo($tipoBrinquedo) {
+        $this ->  tipoBrinquedo=ucwords(strtolower($tipoBrinquedo));
+    }
+    public function getTipoBrinquedo() {
         echo $this->tipoBrinquedo;
     }
 }
 
 class Crianca {
     public $nomeCrianca; 
+
+    public function __construct($nomeCrianca){
+        $this-> setNomeCrianca($nomeCrianca);
+    }
+
+    public function setNomeCrianca($nomeCrianca){
+        $this -> nomeCrianca = ucwords(strtolower($nomeCrianca));
+    }
+
+    public function getNomeCrianca() {
+        return $this -> nomeCrianca;
+    }
     public function receberBrinquedo(){
         echo "O(a) {$this->nomeCrianca} recebeu o brinquedo"; 
     }
