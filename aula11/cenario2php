@@ -1,0 +1,131 @@
+<?php
+namespace AULA11\Exercicios;
+/* 
+class herois {
+public $nome;
+public function fazerTreinamentos() {
+}
+public function doar(){
+}
+public function ir () {
+}
+}
+$Batman = new herois();
+$Batman -> nome = batman; 
+$Batman -> fazerTreinamentos(); 
+$Batman -> doar();
+$Batman -> ir(); 
+$Superman -> new herois(); 
+$Superman -> nome = Superman; 
+$Superman -> fazerTreinamentos(); 
+$Superman -> doar();
+$Superman -> ir(); 
+$HomemAranha = new herois();
+$HomemAranha -> nome = HomemAranha; 
+$HomemAranha -> fazerTreinamentos(); 
+$HomemAranha -> doar();
+$HomemAranha -> ir(); 
+
+class lugares {
+public nome; 
+}
+$Cotil = new Lugares(); 
+$Cotil -> nome = Cotil; 
+$Shopping = new Lugares(); 
+$Shopping -> nome = Shopping; 
+*/
+
+
+class Heroi {
+    public String $nomeHeroi; 
+
+    public function __construct($nomeHeroi){
+        $this->setNomeHeroi($nomeHeroi);
+    }
+    public function setNomeHeroi($nomeHeroi) {
+        $this -> nomeHeroi = ucwords(strtolower($nomeHeroi));
+    }
+    public function getNomeHeroi() {
+        $this-> nomeHeroi;
+    }
+    public function treinar() {
+        echo "{$this->nomeHeroi} treinou.";
+    }
+    public function realizarMissao() {
+        echo "{$this->nomeHeroi} realizou a missão.";
+    }
+    public function doarBrinquedo() {
+        echo "{$this->nomeHeroi} doou o brinquedo.";
+    }
+}
+
+class Missao { 
+    public static function inciar() {
+        echo "A missão foi iniciada";
+    }
+    public static function finalizar() {
+        echo "A missão foi finalizada";
+    }
+}
+
+Missao::inciar(); 
+
+class LocalDeTreinamento {
+    public String $nomeLocal; 
+
+    public function __construct($nomeLocal){
+        $this->setNomeLocal($nomeLocal);
+    }
+
+    public function setNomeLocal($nomeLocal) {
+        $this-> nomeLocal = ucwords(strtolower($nomeLocal));
+    }
+
+    public function getLocal() {
+        return $this -> nomeLocal;
+    }
+    public function oferecerTreinamento() {
+        echo "O treino foi oferecido no {$this->nomeLocal}";
+    }
+}
+
+class Shopping {
+    public static function receberDoacao() {
+        echo "A doação foi recebida";
+    }
+}
+
+class Brinquedo { 
+    public String $tipoBrinquedo; 
+
+    public function __construct($tipoBrinquedo){
+        $this -> setNomeTipoBrinquedo($tipoBrinquedo);
+    }
+
+    public function setNomeTipoBrinquedo($tipoBrinquedo) {
+        $this ->  tipoBrinquedo=ucwords(strtolower($tipoBrinquedo));
+    }
+    public function getTipoBrinquedo() {
+        echo $this->tipoBrinquedo;
+    }
+}
+
+class Crianca {
+    public $nomeCrianca; 
+
+    public function __construct($nomeCrianca){
+        $this-> setNomeCrianca($nomeCrianca);
+    }
+
+    public function setNomeCrianca($nomeCrianca){
+        $this -> nomeCrianca = ucwords(strtolower($nomeCrianca));
+    }
+
+    public function getNomeCrianca() {
+        return $this -> nomeCrianca;
+    }
+    public function receberBrinquedo(){
+        echo "O(a) {$this->nomeCrianca} recebeu o brinquedo"; 
+    }
+}
+?>
