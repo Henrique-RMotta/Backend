@@ -21,3 +21,31 @@ pattern: /\D/--> significa qualquer caracter que não seja um digito
 (int) $variavel garante valor inteiro
 
 abs(variável) garante o numero positivo 
+
+
+
+Array Associativo 
+
+Diferentemente dos arrays convencionais que associam os valores armazenados no array a um índice, nos arrays associativos os valores são associados a uma chave, aonde as chaves assumem o papel do índice do array. Exemplo: 
+
+$alunos["nome"] = "Gabrielson";
+
+neste exemplo o valor "Gabrielson" está associado á chave "nome". 
+Isso é feito para melhorar o entendimento do código e na execução e manipulação do array. Caso fossemos trabalhar com um array tradicional, teremos que lembrar o índice que iria corresponder a chave "nome".
+
+Formato do arquivo JSON 
+$dao -> criarAluno(new aluno ("1","João","DEV"));
+$dao -> criarAluno(new aluno ("2","Maria","mecânica"));
+
+-- JSON de $alunos[];
+[
+    { "id":"1",
+      "nome":"João",
+      "Curso": "Dev"
+    },
+    { "id":2,
+      "nome":"Mariana",
+      "Curso" :"mecnica"
+    }
+];
+

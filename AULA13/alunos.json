@@ -1,0 +1,32 @@
+{
+    "1": {
+        "id": "1",
+        "nome": "morsa",
+        "curso": "tec em mec"
+    },
+    "2": {
+        "id": 2,
+        "nome": "Victor Hugo",
+        "curso": "manicure"
+    },
+    "5": {
+        "id": 5,
+        "nome": "Olivier",
+        "curso": "Eletrica"
+    },
+    "6": {
+        "id": 6,
+        "nome": "Amanda",
+        "curso": "Logistica"
+    },
+    "8": {
+        "id": 8,
+        "nome": "Joana",
+        "curso": "Eletrica"
+    },
+    "9": {
+        "id": 9,
+        "nome": "Miguel",
+        "curso": "Designer"
+    }
+}
