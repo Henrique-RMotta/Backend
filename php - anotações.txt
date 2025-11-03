@@ -49,3 +49,10 @@ $dao -> criarAluno(new aluno ("2","Maria","mecânica"));
     }
 ];
 
+O mdoelo MVC para criação de sistemas 
+- O Que é o padrão MVC 
+Este padrão é usado para o desenvolvimento limpo e organizado de aplicações 
+m->representa Model: representa os dados e as regras de negócio. Exemplo: Aluno.php(CRUD) e AlunoDAO.php 
+V-> View: Cuida da parte gráfica e da interface com o usuário, ou seja, o que aparece na tela. Exemplo: Index.html ou Index.php
+C-> Controller: é o intermediário entre a interface e os dados e regras de negócio. Exemplo: AlunoController.php
+
