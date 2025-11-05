@@ -1,11 +1,14 @@
 <?php
-// Confirmações de formulário
-require_once __DIR__ . "/../controller/BebidaController.php";
 
-if ($_SERVER['REQUEST_METHOD' === 'POST']) {
+namespace Aula15;
+// Confirmações de formulário 213
+require_once __DIR__ . "\\..\\controller\\BebidaController.php";
+$controller = new BebidaController();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $acao = $_POST['acao'] ?? '';
     if($acao === 'criar'){
-        $controller->salvar(
+        $controller->criar(
             $_POST['nome'],
             $_POST['categoria'],
             $_POST['volume'],
@@ -13,7 +16,9 @@ if ($_SERVER['REQUEST_METHOD' === 'POST']) {
             $_POST['qtde']
         );
     } elseif ($acao === 'deletar') {
-        $controller->deletar($_POST['id']);
+        $controller->deletar($_POST['nome']);
+    } elseif ($acao === 'verItens') {
+        $controller->ler();
     }
 }
 ?>
@@ -28,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD' === 'POST']) {
 <body>
     <h1>Formulário para preenchimento de bebidas:</h1>
     <form method="POST">
-        <input type="hidden" name="acao" value="">
+        <input type="hidden" name="acao" value="criar">
         <input type="text" name="nome" placeholder="Nome da Bebida:" required>
         <select name="categoria" required>
             <option value="">Selecione a Categoria</option>
@@ -44,6 +49,20 @@ if ($_SERVER['REQUEST_METHOD' === 'POST']) {
         <input type="number" name="qtde" placeholder="Quantidade em Estoque:" required>
         <button type="submit">Cadastrar</button>
     </form>
+    <table method="POST">
+        <button name="acao" value="VerItens"></button>
+        <tr>
+            <th>nome</th>
+            <th>categoria</th>
+            <th>volume</th>
+            <th>valor</th>
+            <th>qtde</th>
+        </tr>
+    </table>
 </body>
+    <script>
+        fetch("bebidas.json")
+        .then()
+    </script>
 </html>
 
