@@ -1,0 +1,9 @@
+{
+    "teste": {
+        "nome": "teste",
+        "categoria": "Cerveja",
+        "volume": "200",
+        "valor": "121",
+        "qtde": "1"
+    }
+}

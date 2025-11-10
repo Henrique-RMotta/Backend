@@ -49,20 +49,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="number" name="qtde" placeholder="Quantidade em Estoque:" required>
         <button type="submit">Cadastrar</button>
     </form>
-    <table method="POST">
-        <button name="acao" value="VerItens"></button>
-        <tr>
-            <th>nome</th>
-            <th>categoria</th>
-            <th>volume</th>
-            <th>valor</th>
-            <th>qtde</th>
-        </tr>
-    </table>
 </body>
-    <script>
-        fetch("bebidas.json")
-        .then()
-    </script>
 </html>
-
