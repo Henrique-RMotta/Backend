@@ -1,9 +1,9 @@
 {
     "teste": {
         "nome": "teste",
-        "categoria": "Cerveja",
-        "volume": "200",
-        "valor": "121",
-        "qtde": "1"
+        "categoria": "Vinho",
+        "volume": "123556576",
+        "valor": "10",
+        "qtde": "10"
     }
 }
