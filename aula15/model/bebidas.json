@@ -1,0 +1,23 @@
+{
+    "abacate": {
+        "nome": "abacate",
+        "categoria": "Cerveja",
+        "volume": "338",
+        "valor": "1223",
+        "qtde": "122"
+    },
+    "aaaaaaa": {
+        "nome": "aaaaaaa",
+        "categoria": "Cerveja",
+        "volume": "200",
+        "valor": "1212",
+        "qtde": "1111"
+    },
+    "aadadafasf": {
+        "nome": "aadadafasf",
+        "categoria": "Cerveja",
+        "volume": "1212",
+        "valor": "2323",
+        "qtde": "121212"
+    }
+}
