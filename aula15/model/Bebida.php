@@ -1,5 +1,5 @@
 <?php 
-namespace aula15\Model;
+namespace aula15;
 class Bebida {
     private $nome; 
     private $categoria; 
@@ -8,11 +8,11 @@ class Bebida {
     private $qtde; 
 
     public function __construct($nome,$categoria,$volume,$valor,$qtde) {
-        $this-> nome = $nome; 
-        $this-> categoria = $categoria; 
-        $this-> volume = $volume; 
-        $this-> valor = $valor; 
-        $this-> qtde = $qtde; 
+        $this-> setNome($nome); 
+        $this-> setCategoria($categoria); 
+        $this-> setVolume($volume); 
+        $this-> setValor($valor); 
+        $this-> setQtde($qtde); 
     }
 
     public function getNome()
