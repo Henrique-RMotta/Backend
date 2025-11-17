@@ -1,6 +1,5 @@
 <?php
 
-namespace Aula15;
 // Confirmações de formulário 213
 require_once __DIR__ . "\\..\\controller\\BebidaController.php";
 $controller = new BebidaController();

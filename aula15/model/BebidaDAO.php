@@ -4,7 +4,7 @@ namespace aula15;
 require_once "Bebida.php";
 class BebidaDAO {
 private $bebidasArray = [];
-    private $arquivoJson = __DIR__ . '\\bebidas.json';
+private $arquivoJson = __DIR__ . '\\bebidas.json';
 
 public function __construct() {
     if (file_exists($this->arquivoJson)) {
@@ -52,16 +52,13 @@ public function lerBebidas() {
 }
 
 // update 
-public function atualizarBebidas($nome,$novoValor,$novaQtde,$novoVolume,$novaCategoria) {
+public function atualizarBebidas($nome,$novoNome,$novoValor,$novaQtde,$novoVolume,$novaCategoria) {
     if (isset($this->bebidasArray[$nome])){
-        $this->bebidasArray[$nome]->setVolume($novoVolume);
-        $this->bebidasArray[$nome]->setValor($novoValor);
-        $this->bebidasArray[$nome]->setQtde($novaQtde);
-<<<<<<< HEAD
-        $this->bebidasArray[$nome]->setVolume($novoVolume);
-=======
->>>>>>> c2ced602e67b6f404078c704e02187f61a890643
-        $this->bebidasArray[$nome]->setCategoria($novaCategoria);
+         unset($this->bebidasArray[$nome]);
+        $bebidaNova = new Bebida($novoNome,$novaCategoria,$novoVolume,$novoValor,$novaQtde);
+        $this->bebidasArray[$novoNome] = $bebidaNova;
+        
+        
     }
     $this->salvarArquivo();
 }
