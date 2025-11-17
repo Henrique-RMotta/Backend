@@ -52,10 +52,12 @@ public function lerBebidas() {
 }
 
 // update 
-public function atualizarBebidas($nome,$novoValor,$novaQtde) {
+public function atualizarBebidas($nome,$novoValor,$novaQtde,$novoVolume,$novaCategoria) {
     if (isset($this->bebidasArray[$nome])){
         $this->bebidasArray[$nome]->setValor($novoValor);
         $this->bebidasArray[$nome]->setQtde($novaQtde);
+        $this->bebidasArray[$nome]->setVolume($novoVolume);
+        $this->bebidasArray[$nome]->setCategoria($novaCategoria);
     }
     $this->salvarArquivo();
 }
