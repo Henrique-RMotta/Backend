@@ -10,14 +10,14 @@ $volume = $_GET['volume'];
     <h1>Editar</h1>
     <input id="nome" type="hidden" name="nome" value="<?php echo $nome;?>" required>
     <input id="nome" type="text" name="novonome" value="<?php echo $nome;?>" required>
-    <select name="categoria" value="<?php echo $categoria;?>" required>
+    <select name="categoria" required>
             <option value="">Selecione a Categoria</option>
-            <option value='Refrigerante'>Refrigerante</option>
-            <option value="Cerveja">Cerveja</option>
-            <option value="Vinho">Vinho</option>
-            <option value="Destilado">Destilado</option>
-            <option value="Água">Água</option>
-            <option value="Energético">Energético</option>
+            <option value="Refrigerante" <?php if($categoria == "Refrigerante") echo 'selected'?>>Refrigerante</option>
+            <option value="Cerveja" <?php if($categoria == "Cerveja") echo 'selected'?>>Cerveja</option>
+            <option value="Vinho" <?php if($categoria == "Vinho") echo 'selected'?>>Vinho</option>
+            <option value="Destilado" <?php if($categoria == "Destilado") echo 'selected'?>>Destilado</option>
+            <option value="Água" <?php if($categoria == "Água") echo 'selected'?>>Água</option>
+            <option value="Energético" <?php if($categoria == "Energético") echo 'selected'?>>Energético</option>
              </select>
         <input type="number" name="volume" placeholder="Volume (ex:300ml):" value="<?php echo $volume;?>"required>
         <input type="number" name="valor" step="0.01" placeholder="Valor em Reais (R$)" value="<?php echo $valor;?>" required>

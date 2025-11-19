@@ -8,15 +8,16 @@ class Connection {
             try {
                 // Ajuste seu usuário e senha aqui
                 $host = 'localhost';
-                $dbname = 'projeto_bebidas2';
+                $dbname = 'projeto_bebidas1';
                 $user = 'root';
-                $pass = '1234';
+                $pass = 'senaisp';
 
+                $dsn_server = "mysql:host=$host;charset=utf8";
                 // Conecta ao MySQL
                 self::$instance = new PDO(
-                    "mysql:host=$host;charset=utf8",
+                    $dsn_server,
                     $user,
-                    $pass
+                    $pass,   
                 );
                 self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 

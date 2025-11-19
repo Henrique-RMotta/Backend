@@ -1,6 +1,4 @@
 <?php
-
-namespace Aula15;
 $nome=$_POST['nome'];
 $novoNome= $_POST['novonome'];
 $qtde =$_POST['qtde'];

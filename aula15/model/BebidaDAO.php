@@ -38,7 +38,7 @@ private function salvarArquivo() {
             'qtde'=>$bebida->getQtde()
         ];
     }
-    file_put_contents($this->arquivoJson,json_encode($dados,JSON_PRETTY_PRINT));
+    file_put_contents($this->arquivoJson,json_encode($dados,JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 }
 // create 
 public function criarBebidas(Bebida $bebida) {
@@ -54,11 +54,23 @@ public function lerBebidas() {
 // update 
 public function atualizarBebidas($nome,$novoNome,$novoValor,$novaQtde,$novoVolume,$novaCategoria) {
     if (isset($this->bebidasArray[$nome])){
-         unset($this->bebidasArray[$nome]);
-        $bebidaNova = new Bebida($novoNome,$novaCategoria,$novoVolume,$novoValor,$novaQtde);
-        $this->bebidasArray[$novoNome] = $bebidaNova;
-        
-        
+      // 1. Pega todas as chaves em ordem
+        $keys = array_keys($this->bebidasArray);
+
+        // 2. Descobre a posição da chave antiga
+        $index = array_search($nome, $keys);
+
+        // 3. Cria o novo objeto
+        $novaBebida = new Bebida($novoNome, $novaCategoria, $novoVolume, $novoValor, $novaQtde);
+
+        // 4. Troca a chave mantendo a mesma posição
+        $keys[$index] = $novoNome;
+
+        // 5. Atualiza o array mantendo ordem
+        $this->bebidasArray = array_combine($keys, $this->bebidasArray);
+
+        // 6. Coloca o objeto atualizado na posição certa
+        $this->bebidasArray[$novoNome] = $novaBebida;
     }
     $this->salvarArquivo();
 }

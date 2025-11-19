@@ -1,16 +1,16 @@
 {
-    "aaaaaaaaa": {
-        "nome": "aaaaaaaaa",
-        "categoria": "Cerveja",
+    "aaaa": {
+        "nome": "aaaa",
+        "categoria": "Refrigerante",
+        "volume": "11",
+        "valor": "111",
+        "qtde": "11"
+    },
+    "á": {
+        "nome": "á",
+        "categoria": "Refrigerante",
         "volume": "1212",
         "valor": "1212",
-        "qtde": "1212"
-    },
-    "tosim": {
-        "nome": "tosim",
-        "categoria": "Vinho",
-        "volume": "12121",
-        "valor": "12122",
         "qtde": "1212"
     }
 }
