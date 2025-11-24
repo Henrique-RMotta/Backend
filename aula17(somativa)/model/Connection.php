@@ -8,7 +8,7 @@ class Connection {
                 $host = 'localhost';
                 $dbname = 'somativa_bilbioteca';
                 $user = 'root';
-                $pass = 'senaisp';
+                $pass = '1234';
 
                 self::$instance = new PDO (
                     "mysql:host=$host;charset=utf8",
@@ -16,7 +16,6 @@ class Connection {
                     $pass,
                 );
                 self::$instance->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-
                 self::$instance->exec("CREATE DATABASE IF NOT EXISTS $dbname CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
                 self::$instance->exec("USE $dbname");
             } catch (PDOException $e) {

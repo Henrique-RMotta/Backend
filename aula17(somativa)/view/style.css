@@ -1,0 +1,93 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding: 20px;
+    gap: 20px;
+    background-color: rgb(187, 202, 202);
+}
+
+.form-cadastro {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    margin-top: 10px;
+    background-color: rgb(241, 241, 241);
+    width: 800px;
+    height: 600px;
+    padding: 50px;
+    border-radius: 30px;
+    box-shadow: 2px 2px 4px 0px black;
+    text-align: center;
+}
+
+input {
+    text-align: center;
+    height: 50px;
+    border-radius: 10px;
+    border: 0;
+    margin-bottom: 30px;
+    box-shadow: 2px 2px 4px 0px black;
+}
+
+select {
+     text-align: center;
+    height: 30px;
+    border-radius: 10px;
+    border: 0;
+    margin-bottom: 30px;
+    box-shadow: 2px 2px 4px 0px black;
+    margin-bottom: 30px;
+}
+
+button {
+    background-color: rgb(73, 233, 73);
+    height: 25px;
+    border: 0;
+    border-radius: 10px;
+    color: white;
+}
+
+#deletar {
+    background-color: rgb(243, 50, 50);
+    height: 25px;
+    width: 100px;
+    border: 0;
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+}
+
+a {
+    display: inline-block;
+    text-align: center;
+    align-items: center;
+    text-decoration: none;
+    height: 25px;
+    width: 100px;
+    background-color: rgb(89, 225, 243);
+    border: 0;
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+}
+
+
+table {
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+    border-collapse: separate;
+    width: 50%;
+    background-color: white;
+}
+
+table tr td, table th {
+  border: 1px solid black;
+  padding: 8px; /* Espaçamento interno */
+    text-align: center;
+    align-items: center;
+}

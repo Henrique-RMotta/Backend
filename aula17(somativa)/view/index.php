@@ -13,46 +13,48 @@ if($_SERVER['REQUEST_METHOD']=='POST') {
             $_POST['qtde']
         );
     }elseif($acao === 'deletar'){
-        $controller->deletar($_POST['titulo']);
+        $controller->deletar($_POST['id']);
     }
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Formulário da Biblioteca</title>
 </head>
 <body>
     <h1>Formulário para preenchimento de Livros</h1>
-    <form method="POST">
+    <form method="POST" class="form-cadastro">
         <input type="hidden" name="acao" value="criar">
-        <input type="text" name="titulo" placeholder="Nome do Livro" required>
-        <select name="genero">
-            <option value=""></option>
+        Titulo:<input type="text" name="titulo" placeholder="Nome do Livro (Ex:O Ceifador)" required>
+        Genero:<select name="genero">
+            <option value="">Selecione o Genero</option>
             <option value="romance">Romance</option>
-            <option value="ficção">Ficção</option>
             <option value="Distopia">Distopia</option>
             <option value="Fantasia">Fantasia</option>
             <option value="Terror">Terror</option>
         </select>
-        <input type="number" name="ano" placeholder="Ano (ex:2024)" required>
-        <input type="text" name="autor" placeholder="autor" required>
-        <input type="number" name="qtde" placeholder="qtde" required>
+        Ano:<input type="number" name="ano" placeholder="Ano (Ex:2016)" required>
+        Autor:<input type="text" name="autor" placeholder="Autor (Ex:Neal Shusterman
+)" required>
+        Qtde:<input type="number" name="qtde" placeholder="Qtde (Ex:2)" required>
         <button type="submit">Cadastrar</button>
     </form>
-
+    <h1>Lista De Livros</h1>
     <?php 
     echo "<table>";
     echo "
     <tr> 
-    <th>titulo</th>
-    <th>genero</th>
-    <th>autor</th>
-    <th>qtde</th>
-    <th>ano</th>
+    <th>Id</th>
+    <th>Titulo</th>
+    <th>Genero</th>
+    <th>Autor</th>
+    <th>Qtde</th>
+    <th>Ano</th>
     <th>Deletar</th>
     <th>Atualizar</th>
     </tr>
@@ -60,21 +62,21 @@ if($_SERVER['REQUEST_METHOD']=='POST') {
     foreach ($controller->ler() as $livros => $livro) {
         echo "
         <tr>
+            <td>{$livro->getId()}</td>
             <td>{$livro->getTitulo()}</td>
             <td>{$livro->getGenero()}</td>
             <td>{$livro->getAutor()}</td>
             <td>{$livro->getQtde()}</td>
             <td>{$livro->getAno()}</td>
             <td>
-             <form method='POST'>
+            <form method='POST'>
                         <input type='hidden' name='acao' value='deletar'>
-                        <input type='hidden' name='titulo' value='{$livro->getTitulo()}'>
-                        <button type='submit'>Deletar</button>
+                        <input type='hidden' name='id' value='{$livro->getId()}'>
+                        <button type='submit' id='deletar'>Deletar</button>
             </form>
             </td>
             <td> 
-            <a href='editar.php?titulo={$livro->getTitulo()}&genero={$livro->getGenero()}&autor={$livro->getAutor()}&ano=
-            {$livro->getAno()}'>editar</a>
+            <a href='editar.php?id={$livro->getId()}&titulo={$livro->getTitulo()}&genero={$livro->getGenero()}&autor={$livro->getAutor()}&ano={$livro->getAno()}&qtde={$livro->getQtde()}'>Atualizar</a>
             </td>
         </tr>
         ";

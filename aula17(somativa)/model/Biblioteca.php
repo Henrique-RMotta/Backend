@@ -1,6 +1,7 @@
 <?php
 class Biblioteca {
-    private  $Titulo; 
+    private $id; 
+    private $Titulo; 
     private  $Autor; 
     private $Ano; 
     private $Genero; 
@@ -41,7 +42,6 @@ class Biblioteca {
         $this->Ano = $Ano;
     }
 
-
     public function getGenero()
     {
         return $this->Genero;
@@ -51,9 +51,6 @@ class Biblioteca {
         $this->Genero = $Genero;
     }
 
-    /**
-     * Get the value of qtde
-     */ 
     public function getQtde()
     {
         return $this->qtde;
@@ -61,6 +58,14 @@ class Biblioteca {
     public function setQtde($qtde)
     {
         $this->qtde = $qtde;
+    }
+    public function getId()
+    {
+        return $this->id;
+    }
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 }
 

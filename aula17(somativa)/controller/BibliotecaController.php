@@ -19,12 +19,12 @@ class BibliotecaController{
         $this->dao->criarBiblioteca($biblioteca);
     }
 
-    public function atualizar($tituloOriginal,$novoTitulo,$novoAutor,$novoGenero,$novoAno,$novaQtde) {
-        $this->dao->atualizarLivro($tituloOriginal,$novoTitulo,$novoAutor,$novoAno,$novoGenero,$novaQtde);
+    public function atualizar($id,$novoTitulo,$novoAutor,$novoAno,$novoGenero,$novaQtde) {
+        $this->dao->atualizarLivro($id,$novoTitulo,$novoAutor,novoAno: $novoAno,novoGenero: $novoGenero,novaQtde: $novaQtde);
     }
 
-    public function deletar($titulo) {
-        $this->dao->excluirLivro($titulo);
+    public function deletar($id) {
+        $this->dao->excluirLivro($id);
     }
 }
 

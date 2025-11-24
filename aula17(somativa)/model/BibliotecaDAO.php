@@ -33,6 +33,7 @@ class BibliotecaDAO {
             ':genero'=>$biblioteca->getGenero(),
             ':qtde'=>$biblioteca->getQtde()
         ]);
+
     }
 
     public function lerBiblioteca () {
@@ -41,20 +42,22 @@ class BibliotecaDAO {
         ");
         $result = [];
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-            $result[] = new Biblioteca(
+            $biblioteca = new Biblioteca(
                 $row['titulo'],
                 $row['autor'],
                 $row['ano'],
                 $row['genero'],
                 $row['qtde']
             );
+            $biblioteca->setId($row['id']);
+            $result[] = $biblioteca;
         }
         return $result;
     }
 
-    public function atualizarLivro($tituloOriginal,$novoTitulo,$novoAutor,$novoAno,$novoGenero,$novaQtde){
+    public function atualizarLivro($id,$novoTitulo,$novoAutor,$novoAno,$novoGenero,$novaQtde){
         $stmt = $this->conn->prepare("
-        UPDATE biblioteca set titulo = :novoTitulo, autor= :novoAutor, ano= :novoAno, genero= novoGenero, qtde=novaQtde WHERE titulo = :tituloOriginal
+        UPDATE biblioteca set titulo = :novoTitulo, autor= :novoAutor, ano= :novoAno, genero= :novoGenero, qtde= :novaQtde WHERE id = :id
         ");
         $stmt->execute([
             ':novoTitulo'=> $novoTitulo, 
@@ -62,15 +65,15 @@ class BibliotecaDAO {
             ':novoAno' => $novoAno,
             ':novoGenero' => $novoGenero,
             ':novaQtde' => $novaQtde,
-            ':tituloOrigina'=> $tituloOriginal
+            ':id'=> $id
         ]);
     }
 
-    public function excluirLivro($titulo) {
+    public function excluirLivro($id) {
         $stmt = $this->conn->prepare(
-            "DELETE FROM Biblioteca WHERE titulo = :titulo"
+            "DELETE FROM Biblioteca WHERE id = :id"
         );
-        $stmt->execute([':titulo'=> $titulo]);
+        $stmt->execute([':id'=> $id]);
     }
 
     public function buscarLivro($titulo){
