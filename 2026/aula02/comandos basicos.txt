@@ -1,0 +1,10 @@
+- criar arq 
+touch {arq}
+
+- "abrir arq"
+nano {arq}
+
+- criar projeto laravel 
+composer create-project laravel/laravel {nome projeto}
+
+10.109.204.19
