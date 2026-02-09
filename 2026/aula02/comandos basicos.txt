@@ -7,4 +7,5 @@ nano {arq}
 - criar projeto laravel 
 composer create-project laravel/laravel {nome projeto}
 
-10.109.204.19
+- iniciar o servidor laravel (é necessário estar dentro da pasta do projeto laravel)
+php artisan serve 
