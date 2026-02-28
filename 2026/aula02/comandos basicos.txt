@@ -1,11 +1,27 @@
-- criar arq 
-touch {arq}
+📁 Arquivos e Diretórios
+touch {arq}	Cria um novo arquivo vazio no terminal.
+nano {arq}	Abre o arquivo no editor de texto Nano para edição.
 
-- "abrir arq"
-nano {arq}
+🚀 Criação e Configuração do Projeto
+composer create-project laravel/laravel {nome}	Cria um novo projeto Laravel do zero usando o Composer.
+laravel new {nome}	Cria um novo projeto Laravel usando o instalador global do Laravel.
+composer global require laravel/installer	Instala/atualiza o instalador global do Laravel no sistema.
+php artisan key:generate	Gera a chave de criptografia da aplicação (APP_KEY no .env).
 
-- criar projeto laravel 
-composer create-project laravel/laravel {nome projeto}
+🗄️ Banco de Dados e Migrations
+php artisan migrate	Executa todas as migrations pendentes, criando/atualizando tabelas no banco.
+php artisan make:model Produto -m	Cria um Model e sua migration correspondente ao mesmo tempo.
+php artisan db:seed	Executa os Seeders para popular o banco de dados com dados iniciais/teste.
+php artisan make:factory ClientesFactory	Cria um Factory para gerar dados falsos de teste para o model Clientes.
 
-- iniciar o servidor laravel (é necessário estar dentro da pasta do projeto laravel)
-php artisan serve 
+🎮 Controllers e Rotas
+php artisan make:controller ClienteController	Cria um Controller para gerenciar a lógica das requisições relacionadas a Clientes.
+
+🔐 Autenticação (Breeze)
+composer require laravel/breeze --dev	Instala o pacote Breeze (autenticação simples) como dependência de desenvolvimento.
+php artisan breeze:install blade	Publica os arquivos de autenticação do Breeze usando o template Blade.
+
+🌐 Frontend e Servidor
+npm install	Instala as dependências JavaScript do projeto (package.json).
+npm run dev	Compila os assets frontend (JS, CSS) em modo desenvolvimento com hot-reload.
+php artisan serve	Inicia o servidor de desenvolvimento local do Laravel (http://localhost:8000).
