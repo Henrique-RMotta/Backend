@@ -13,7 +13,7 @@ php artisan migrate	Executa todas as migrations pendentes, criando/atualizando t
 php artisan make:model Produto -m	Cria um Model e sua migration correspondente ao mesmo tempo.
 php artisan db:seed	Executa os Seeders para popular o banco de dados com dados iniciais/teste.
 php artisan make:factory ClientesFactory	Cria um Factory para gerar dados falsos de teste para o model Clientes.
-
+php artisan migrate:refresh Remove todas as tabelas do banco de dados (não apenas as controladas pelas migrations) e executa o migrate novamente desde o início.
 🎮 Controllers e Rotas
 php artisan make:controller ClienteController	Cria um Controller para gerenciar a lógica das requisições relacionadas a Clientes.
 
