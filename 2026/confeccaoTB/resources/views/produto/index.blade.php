@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Clientes') }}
+            {{ __('Produtos') }}
         </h2>
     </x-slot>
 
@@ -11,7 +11,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
                 <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
-                    <p class="text-sm text-gray-600">Total: <span class="font-semibold text-gray-800">{{ $clientes->count() }}</span> clientes</p>
+                    <p class="text-sm text-gray-600">Total: <span class="font-semibold text-gray-800">{{ $produtos->count() }}</span> produtos</p>
                     <input
                         type="text"
                         id="searchInput"
@@ -22,39 +22,40 @@
                 </div>
 
                 <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200" id="tabelaClientes">
+                    <table class="min-w-full divide-y divide-gray-200" id="tabelaProdutos">
                         <thead class="bg-gray-50">
                             <tr>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-16">#</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nome</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">CPF</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Telefone</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Reserva</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Descrição</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Preço</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Criado em</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            @forelse($clientes as $cliente)
+                            @forelse($produtos as $produto)
                                 <tr class="hover:bg-gray-50 transition-colors duration-150">
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-400">
-                                        {{ $cliente->id }}
+                                        {{ $produto->id }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                        {{ $cliente->name }}
+                                        {{ $produto->PR_nome }}
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-600">
+                                        {{ $produto->PR_descricao }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                                        {{ $cliente->cpf }}
+                                        R$ {{ number_format($produto->PR_preco, 2, ',', '.') }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                                        {{ $cliente->telefone }}
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                                        {{ $cliente->reserva }}
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        {{ $produto->created_at->format('d/m/Y') }}
+                                        <span class="text-gray-400 text-xs ml-1">{{ $produto->created_at->format('H:i') }}</span>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
                                     <td colspan="5" class="px-6 py-12 text-center text-sm text-gray-400">
-                                        Nenhum cliente encontrado.
+                                        Nenhum produto encontrado.
                                     </td>
                                 </tr>
                             @endforelse
@@ -69,7 +70,7 @@
     <script>
         function filtrarTabela() {
             const input = document.getElementById('searchInput').value.toLowerCase();
-            document.querySelectorAll('#tabelaClientes tbody tr').forEach(row => {
+            document.querySelectorAll('#tabelaProdutos tbody tr').forEach(row => {
                 row.style.display = row.innerText.toLowerCase().includes(input) ? '' : 'none';
             });
         }

@@ -9,6 +9,7 @@ use App\Models\Clientes;
 use App\Models\Pedido;
 use App\Models\Fornecedor;
 use App\Models\Estoque;
+use App\Models\Produto;
 class DatabaseSeeder extends Seeder
 {
     use WithoutModelEvents;
@@ -35,5 +36,6 @@ class DatabaseSeeder extends Seeder
         Pedido::factory(10)->create();
         Fornecedor::factory(10)->create();
         Estoque::factory(10)->create();
+        Produto::factory(10)->create();
     }
 }

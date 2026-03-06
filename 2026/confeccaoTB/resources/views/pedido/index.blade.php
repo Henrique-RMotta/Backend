@@ -20,6 +20,7 @@
 
                 {{-- Cabeçalho do card com busca --}}
                 <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+                    <p class="text-sm text-gray-600">Total: <span class="font-semibold text-gray-800">{{ $pedidos->count() }}</span> pedidos</p>
                     <input
                         type="text"
                         id="searchInput"
@@ -31,7 +32,7 @@
 
                 {{-- Tabela --}}
                 <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200" id="tabelaPedidos">
+                    <table class="min-w-full divide-y divide-gray-200 w-full" id="tabelaPedidos">
                         <thead class="bg-gray-50">
                             <tr>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-16">#</th>
@@ -39,7 +40,6 @@
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Produto</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fornecedor</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Criado em</th>
-                                <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
@@ -64,7 +64,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="6" class="px-6 py-12 text-center text-sm text-gray-400">
+                                    <td colspan="5" class="px-6 py-12 text-center text-sm text-gray-400">
                                         Nenhum pedido encontrado.
                                     </td>
                                 </tr>

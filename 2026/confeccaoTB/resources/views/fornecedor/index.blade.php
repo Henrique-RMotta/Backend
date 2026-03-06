@@ -17,6 +17,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
                 <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+                    <p class="text-sm text-gray-600">Total: <span class="font-semibold text-gray-800">{{ $fornecedores->count() }}</span> Fornecedores</p>
                     <input
                         type="text"
                         id="searchInput"

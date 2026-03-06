@@ -7,6 +7,8 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\FornecedorController;
 use App\Http\Controllers\EstoqueController;
+use App\Http\Controllers\ProdutoController;
+
 require __DIR__.'/auth.php';
 Route::get('/', function () {
     return view('welcome');
@@ -29,7 +31,8 @@ Route::get('/pedido' ,[PedidoController::class, 'index'])->name('pedido.index');
 Route::get('/fornecedor' ,[FornecedorController::class,'index'])->name('fornecedor.index');
 //rota de estoque 
 Route::get('/estoque',[EstoqueController::class,'index'])->name('estoque.index');
-
+//rota de produtos 
+Route::get('/produto', [ProdutoController::class,'index'])->name('produto.index');
 
 
 
