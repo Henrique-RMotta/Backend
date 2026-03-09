@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');    // nome cliente
             $table->string('cpf');      // cpf cliente
             $table->text('telefone');   // Telefone
-            $table->string('reserva'); // N# em estoque
+            $table->string('email');
             $table->timestamps();
         });
     }

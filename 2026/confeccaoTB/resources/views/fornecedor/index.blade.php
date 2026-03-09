@@ -67,7 +67,11 @@
                         </tbody>
                     </table>
                 </div>
-
+                <div class="px-4 py-2 bg-gray-800 text-white text-sm font-semibold rounded-md hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-300 transition ease-in-out duration-150">
+                    <x-nav-link :href="route('fornecedor.create')" :active="request()->routeIs('fornecedor')">
+                        {{ __('Adicionar novo fornecedor') }}
+                    </x-nav-link>
+                </div>
             </div>
         </div>
     </div>

@@ -8,5 +8,5 @@ class Clientes extends Model
 {
        /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
-    protected $fillable = ['name','cpf','telefone','reserva'];
+    protected $fillable = ['name','email','cpf','telefone'];
 }
