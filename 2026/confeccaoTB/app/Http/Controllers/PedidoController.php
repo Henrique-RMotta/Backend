@@ -24,6 +24,26 @@ class PedidoController extends Controller
         
         Pedido::create($request->all());
 
-        return redirect()->route('pedido.index')->with('sucess','Pedido cadastrado com sucesso');
+        return redirect()->route('pedido.index')->with('success','Pedido cadastrado com sucesso');
+    }
+
+    public function edit(Pedido $pedido) {
+        return view("pedido.edit", compact('pedido'));
+    }
+
+    public function update(Request $request, Pedido $pedido){
+         $request ->validate([
+            "nome" => 'required|string|max:100',
+            "produto" => 'required|string|max:100|unique:pedidos,produto,' . $pedido->id,
+            "fornecedor" => 'required|string|max:100'
+        ]);
+
+        $pedido->update($request->all());
+        return redirect()->route('pedido.index')->with('success', 'Pedido atualizado com sucesso');
+    }
+
+    public function destroy(Pedido $pedido) {
+        $pedido->delete();
+        return redirect()->route("pedido.index")->with('sucess', 'Pedido removido com sucesso');
     }
 }
