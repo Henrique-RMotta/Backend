@@ -25,3 +25,15 @@ php artisan breeze:install blade	Publica os arquivos de autenticação do Breeze
 npm install	Instala as dependências JavaScript do projeto (package.json).
 npm run dev	Compila os assets frontend (JS, CSS) em modo desenvolvimento com hot-reload.
 php artisan serve	Inicia o servidor de desenvolvimento local do Laravel (http://localhost:8000).
+
+
+Filament 
+composer require filament/filament:"^5" -W
+php artisan filament:install --panels
+php artisan make:filament-view Fornecedor
+php artisan make:filament-resource {nome do recurso}
+php artisan make:filament-user 
+
+Otimização
+php artisan optimize:clear
+composer dump-autoload
