@@ -17,6 +17,7 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Support\RawJs;
 class ClienteResource extends Resource
 {
     protected static ?string $model = Cliente::class;
@@ -31,8 +32,10 @@ class ClienteResource extends Resource
         ->components([
             textInput::make('nome')->required()->label('Nome Completo'),
             textInput::make('email')->required()->email()->label('Email'),
-            textInput::make('telefone')->tel()->label('telefone'),
-            textInput::make('documento')->label('CPF ou CNPJ'),
+            textInput::make('telefone')->tel()->label('telefone')->mask('(99) 99999-9999'),
+            textInput::make('documento')->label('CPF ou CNPJ')->mask(RawJs::make(<<<'JS'
+                    $input.length > 14 ? '99.999.999/9999-99' : '999.999.999-99' 
+                JS)),
         ]);
         // return ClienteForm::configure($schema);
     }
