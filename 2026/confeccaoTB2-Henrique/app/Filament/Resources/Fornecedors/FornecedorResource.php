@@ -18,7 +18,9 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\CheckboxList;
-
+use Filament\Actions\ViewAction;
+use Filament\Actions\EditAction;
+use Filament\Support\RawJs;
 class FornecedorResource extends Resource
 {
     protected static ?string $model = Fornecedor::class;
@@ -33,8 +35,10 @@ class FornecedorResource extends Resource
             ->components([
                 textInput::make("FR_nome")->required()->label('Nome Completo'),
                 textInput::make("FR_email")->required()->email()->label('Email'),
-                textInput::make('FR_telefone')->tel()->label('Telefone'),
-                textInput::make("FR_CNPJ")->label('CPF ou CNPJ'),
+                textInput::make('FR_telefone')->tel()->label('Telefone')->mask('(99) 99999-9999'),
+                textInput::make("FR_CNPJ")->label('CPF ou CNPJ')->mask(RawJs::make(<<<'JS'
+                    $input.length > 14 ? '99.999.999/9999-99' : '999.999.999-99' 
+                JS)),
                 CheckboxList::make('FR_tipo')->label('Tipo de Fornecedor')
                     ->options([
                         'alimentacao' => 'Alimentação',
@@ -56,6 +60,9 @@ class FornecedorResource extends Resource
                 textColumn::make('FR_CNPJ')->label('CNPJ do Fornecedor')->searchable()->sortable(),
                 textColumn::make('FR_tipo')->label('Tipo de fornecedor')->searchable()->sortable(),
 
+            ])->recordActions([
+                ViewAction::make()->label('Visualizar'),
+                EditAction::make()->label('Editar'),
             ]);
     }
 

@@ -54,6 +54,9 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->profile(
+                    isSimple: false, // abre página completa de perfil
+                );
     }
 }

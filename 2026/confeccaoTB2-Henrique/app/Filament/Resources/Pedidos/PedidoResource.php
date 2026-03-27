@@ -21,7 +21,8 @@ use Filament\Forms\Components\Repeater;
 use \Filament\Tables\Columns\TextColumn;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
-
+use Filament\Actions\ViewAction;
+use Filament\Actions\EditAction;
 class PedidoResource extends Resource
 {
     protected static ?string $model = Pedido::class;
@@ -97,6 +98,7 @@ class PedidoResource extends Resource
                             ,
 
             ]);
+                    
     }
     
 
@@ -134,6 +136,9 @@ class PedidoResource extends Resource
                     ->dateTime('d/m/Y H:i')
                     ->sortable()
                 
+            ])->recordActions([
+                ViewAction::make()->label('Visualizar'),
+                EditAction::make()->label('Editar'),
             ]);
     }
 

@@ -17,7 +17,8 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\TextColumn;
-
+use Filament\Actions\ViewAction;
+use Filament\Actions\EditAction;
 class InsumoResource extends Resource
 {
     protected static ?string $model = Insumo::class;
@@ -50,6 +51,9 @@ class InsumoResource extends Resource
                 TextColumn::make('unidade_medida'),
                 TextColumn::make('preco_custo')->money('BRL'),
                 TextColumn::make('estoque'),
+            ])                    ->recordActions([
+                ViewAction::make()->label('Visualizar'),
+                EditAction::make()->label('Editar'),
             ]);
     }
 

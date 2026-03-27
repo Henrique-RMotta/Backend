@@ -10,29 +10,32 @@ use App\Filament\Resources\Produtos\Schemas\ProdutoForm;
 use App\Filament\Resources\Produtos\Schemas\ProdutoInfolist;
 use App\Filament\Resources\Produtos\Tables\ProdutosTable;
 use App\Models\Produto;
-use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Filament\Actions\ViewAction;
+use Filament\Actions\EditAction;
+use Filament\Tables\Actions\Action;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\TextColumn;
+use BackedEnum;
 class ProdutoResource extends Resource
 {
     protected static ?string $model = Produto::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static BackedEnum|string|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static ?string $recordTitleAttribute = 'Produto';
+    protected static ?string $recordTitleAttribute = 'nome';
 
     public static function form(Schema $schema): Schema
     {
         return $schema 
             ->components([
-                textInput::make('nome')->required()->label("Nome do Produto"),
-                textInput::make("referencia")->label("Referencia"),
-                textInput::make('preco_venda')->numeric()->prefix("R$")->required(),
-                textInput::make('estoque')->numeric()->default(0)->required()->label('Estoque'),
+                TextInput::make('nome')->required()->label("Nome do Produto"),
+                TextInput::make("referencia")->label("Referencia"),
+                TextInput::make('preco_venda')->numeric()->prefix("R$")->required(),
+                TextInput::make('estoque')->numeric()->default(0)->required()->label('Estoque'),
             ]);
     }
 
@@ -49,6 +52,10 @@ class ProdutoResource extends Resource
                 TextColumn::make("referencia"),
                 TextColumn::make('preco_venda')->money('BRL'),
                 TextColumn::make('estoque'),
+            ])
+            ->recordActions([
+                ViewAction::make()->label('Visualizar'),
+                EditAction::make()->label('Editar'),
             ]);
 
     }

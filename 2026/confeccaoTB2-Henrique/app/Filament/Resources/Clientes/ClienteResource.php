@@ -18,6 +18,8 @@ use Filament\Tables\Table;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Support\RawJs;
+use Filament\Actions\ViewAction;
+use Filament\Actions\EditAction;
 class ClienteResource extends Resource
 {
     protected static ?string $model = Cliente::class;
@@ -55,6 +57,9 @@ class ClienteResource extends Resource
                 textColumn::make('telefone')->label('Telefone')->searchable()->sortable(),
                 textColumn::make('documento')->label('CPF ou CNPJ')->searchable()->sortable(),
              
+            ])->recordActions([
+                ViewAction::make()->label('Visualizar'),
+                EditAction::make()->label('Editar'),
             ]);
     }
 
