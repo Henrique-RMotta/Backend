@@ -20,9 +20,15 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Support\RawJs;
 use Filament\Actions\ViewAction;
 use Filament\Actions\EditAction;
+use UnitEnum;
+
 class ClienteResource extends Resource
 {
     protected static ?string $model = Cliente::class;
+
+    protected static string|UnitEnum|null $navigationGroup = 'Cadstros Gerais';
+
+    protected static ?int $navigationSort = 1 ;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 

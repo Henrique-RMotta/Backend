@@ -23,6 +23,8 @@ use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Actions\ViewAction;
 use Filament\Actions\EditAction;
+use UnitEnum;
+
 class PedidoResource extends Resource
 {
     protected static ?string $model = Pedido::class;
@@ -30,6 +32,16 @@ class PedidoResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'Pedido';
+
+    protected static string|UnitEnum|null $navigationGroup = 'Vendas';
+
+    protected static ?int $navigationSort = 2 ;
+
+    protected static ?string $navigationLabel = 'Pedido';
+
+    protected static ?string $modelLabel = 'Pedido';
+
+    protected static ?string $pluralModelLabel = 'Pedidos';
 
     public static function form(Schema $schema): Schema
     {

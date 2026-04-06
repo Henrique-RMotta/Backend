@@ -21,6 +21,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class PermisionResource extends Resource
 {
@@ -29,6 +30,19 @@ class PermisionResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'Permissões';
+
+    protected static string|UnitEnum|null $navigationGroup = 'Configurações';
+
+    protected static ?int $navigationSort = 2 ;
+
+    
+    public static function getLabel(): string {
+        return "Permissão";
+    }
+
+    public static function getPluralLabel(): string {
+        return "Permissões";
+    }
 
     public static function form(Schema $schema): Schema
     {

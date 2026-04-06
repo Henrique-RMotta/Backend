@@ -23,6 +23,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Tables\Columns\TextColumn;
 use Ramsey\Collection\Set;
+use UnitEnum;
 
 class RoleResource extends Resource
 {
@@ -37,10 +38,14 @@ class RoleResource extends Resource
     //     return auth()->user()?->hasRole('Admin') ?? false;
     // }
 
-    public static function canAccess(): bool
-    {
-        return auth()->user()?->can('acessar_clientes') ?? false;
-    }
+     protected static string|UnitEnum|null $navigationGroup = 'Configurações';
+
+    protected static ?int $navigationSort = 1 ;
+
+    // public static function canAccess(): bool
+    // {
+    //     return auth()->user()?->can('acessar_clientes') ?? false;
+    // }
 
     public static function getLabel(): string {
         return "Função";

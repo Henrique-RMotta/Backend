@@ -20,6 +20,8 @@ use Filament\Tables\Actions\Action;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\TextColumn;
 use BackedEnum;
+use UnitEnum;
+
 class ProdutoResource extends Resource
 {
     protected static ?string $model = Produto::class;
@@ -27,6 +29,10 @@ class ProdutoResource extends Resource
     protected static BackedEnum|string|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'nome';
+
+    protected static string|UnitEnum|null $navigationGroup = 'Estoque';
+
+    protected static ?int $navigationSort = 2 ;
 
     public static function form(Schema $schema): Schema
     {

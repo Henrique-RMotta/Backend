@@ -19,6 +19,8 @@ use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Actions\ViewAction;
 use Filament\Actions\EditAction;
+use UnitEnum;
+
 class InsumoResource extends Resource
 {
     protected static ?string $model = Insumo::class;
@@ -26,6 +28,10 @@ class InsumoResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'yes';
+
+    protected static string|UnitEnum|null $navigationGroup = 'Estoque';
+
+    protected static ?int $navigationSort = 1 ;
 
     public static function form(Schema $schema): Schema
     {

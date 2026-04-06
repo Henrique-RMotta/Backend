@@ -21,13 +21,25 @@ use Filament\Forms\Components\CheckboxList;
 use Filament\Actions\ViewAction;
 use Filament\Actions\EditAction;
 use Filament\Support\RawJs;
+use UnitEnum;
+
 class FornecedorResource extends Resource
 {
     protected static ?string $model = Fornecedor::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
+    protected static string|UnitEnum|null $navigationGroup = 'Cadstros Gerais';
+
+    protected static ?int $navigationSort = 2 ;
+
     protected static ?string $recordTitleAttribute = 'Fornecedor';
+
+    protected static ?string $navigationLabel = 'Fornecedor';
+
+    protected static ?string $modelLabel = 'Fornecedor';
+
+    protected static ?string $pluralModelLabel = 'Fornecedores';
 
     public static function form(Schema $schema): Schema
     {
