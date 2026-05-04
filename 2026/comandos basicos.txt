@@ -37,3 +37,8 @@ php artisan make:filament-user
 Otimização
 php artisan optimize:clear
 composer dump-autoload
+
+Api 
+php artisan install:api
+laravel new projeto-api --api
+php artisan make:controller Api/PokemonController --api
