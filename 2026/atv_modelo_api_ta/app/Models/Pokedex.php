@@ -26,6 +26,5 @@ class Pokedex extends Model
         'POKE_elements'  => 'array',
         'POKE_stats'     => 'array',
         'POKE_abilities' => 'array',
-        'POKE_shiny'     => 'boolean',
     ];
 }

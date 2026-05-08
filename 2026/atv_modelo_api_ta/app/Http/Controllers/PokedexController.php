@@ -14,38 +14,50 @@ public function create()
     }
    public function store(Request $request)
 {
-    // 1. Faz a validação (lembre-se de mudar de string para array como mostrado acima)
     $dados = $request->validate([
-        'POKE_name' => 'required|string',
-        'POKE_height'     => 'required|numeric',
-        'POKE_weight'     => 'required|numeric',
-        'POKE_stats'      => 'required|array',
-        'POKE_generation' => 'required|string|max:50',
-        'POKE_sprite'     => 'nullable|image|max:2048', 
-        'POKE_shiny'      => 'nullable|boolean',
-        'POKE_abilities' => 'required|array',
+        'POKE_name'        => 'required|string',
+        'POKE_height'      => 'required|numeric',
+        'POKE_weight'      => 'required|numeric',
+        'POKE_stats'       => 'required|array',
+        'POKE_generation'  => 'required|string|max:50',
+        'POKE_sprite'      => 'nullable|image|max:2048',
+        'POKE_shiny'       => 'nullable|image|max:2048',
+        'POKE_abilities'   => 'required|array',
         'POKE_abilities.*' => 'string',
-        'POKE_elements' => 'required|array|max:2', 
-        'POKE_audio'      => 'nullable|file|max:5120', 
-        'POKE_xp'         => 'required|integer|min:0',
+        'POKE_elements'    => 'required|array|max:2',
+        'POKE_audio'       => 'nullable|file|max:5120',
+        'POKE_xp'          => 'required|integer|min:0',
     ]);
 
-    // 2. Transforma os Arrays em texto (String) separado por vírgulas
-    if ($request->has('POKE_abilities')) {
-        // Transforma ['Blaze', 'Solar Power'] em "Blaze, Solar Power"
-        $dados['POKE_abilities'] = implode(', ', $request->POKE_abilities);
+    // Abilities → string
+    $dados['POKE_abilities'] = implode(', ', $request->POKE_abilities);
+
+    // Elements → string
+    $dados['POKE_elements'] = implode(', ', $request->POKE_elements);
+
+    // POKE_stats → JSON  ← FIX PROBLEMA 4
+    // O cast 'array' no Model faz o encode/decode automaticamente,
+    // mas precisamos garantir que chegue como array limpo:
+    $dados['POKE_stats'] = $request->input('POKE_stats'); // já é array, o cast encode
+
+    // Sprite normal
+    if ($request->hasFile('POKE_sprite')) {
+        $dados['POKE_sprite'] = $request->file('POKE_sprite')->store('pokemons', 'public');
     }
 
-    if ($request->has('POKE_elements')) {
-        // Transforma ['Fire', 'Flying'] em "Fire, Flying"
-        $dados['POKE_elements'] = implode(', ', $request->POKE_elements);
+    // Sprite shiny
+    if ($request->hasFile('POKE_shiny')) {
+        $dados['POKE_shiny'] = $request->file('POKE_shiny')->store('pokemons', 'public');
     }
 
-    // 3. Salva no banco de dados com as strings formatadas
+    // Áudio
+    if ($request->hasFile('POKE_audio')) {
+        $dados['POKE_audio'] = $request->file('POKE_audio')->store('cries', 'public');
+    }
+
     Pokedex::create($dados);
 
-    // 4. Redireciona com sucesso
-    return redirect()->route("pokemon.index")->with('success', 'Pokémon adicionado à Pokédex!');
+    return redirect()->route('pokemon.index')->with('success', 'Pokémon adicionado à Pokédex!');
 }
 }
 
