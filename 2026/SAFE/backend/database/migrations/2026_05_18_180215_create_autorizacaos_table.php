@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('autorizacaos', function (Blueprint $table) {
             $table->id();
-            $table->string('AUT_alunoname')->unique();
+            $table->string('AUT_alunoname');        
             $table->string('AUT_alunoclass');
-            $table->enum('AUT-type',['entrada'],['saida']);
+            $table->enum('AUT_type', ['entrada', 'saida']); 
             $table->string('AUT_nameaqv');
-            $table->json('AUT_fouls');
+            $table->text('AUT_signature_image');
+            $table->string('AUT_teacher_email')->nullable();
+            $table->json('AUT_fouls')->nullable();  
             $table->dateTime('AUT_time');
             $table->timestamps();
         });

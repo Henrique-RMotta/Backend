@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('portarias', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->foreignId('AUT_ID')->constrained('autorizacaos')->cascadeOnDelete();
-            $table->boolean('PORT_validate');
+            $table->boolean('PORT_validate')->default(false); // default false = ainda não validado
+            $table->timestamps();
         });
     }
 
