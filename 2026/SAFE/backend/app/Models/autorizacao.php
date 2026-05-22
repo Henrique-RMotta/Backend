@@ -14,6 +14,7 @@ class autorizacao extends Model
         'AUT_alunoclass',
         'AUT_type',
         'AUT_nameaqv',
+        'AUT_signature_name',
         'AUT_signature_image',
         'AUT_teacher_email',
         'AUT_fouls',

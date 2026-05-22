@@ -15,7 +15,7 @@ class AutorizacoesController extends Controller
      */
     public function index()
     {
-        $autorizacoes = autorizacao::all();
+        $autorizacoes = autorizacao::with('portaria')->orderBy('created_at', 'desc')->get();
         return response()->json($autorizacoes);
     }
 
@@ -30,18 +30,25 @@ class AutorizacoesController extends Controller
             "AUT_alunoname"      => "required|string|max:255",
             "AUT_alunoclass"     => "required|string|max:255",
             "AUT_type"           => "required|in:entrada,saida",
-            "AUT_signature_name" => "required|string|max:255",
             "AUT_signature_image" => "required|string",
             "AUT_teacher_email"  => "required|email|max:255",
-            "AUT_fouls"          => "nullable|array",
-            "AUT_time"           => "required|date",
+            "AUT_fouls"          => "nullable",
+            "AUT_time"           => "required",
+            "AUT_nameaqv"        => "nullable|string"
         ]);
 
         try {
-            autorizacao::create($validated);
+            // Garantir que campos extras do front sejam salvos
+            $validated['AUT_signature_name'] = $request->AUT_nameaqv ?? 'AQV';
+            
+            $aut = autorizacao::create($validated);
+            
+            // Cria o registro na portaria vinculado a esta autorização
+            \App\Models\portaria::create(['AUT_ID' => $aut->id]);
+
             return response()->json(['mensagem' => 'Autorização criada'], 201);
         } catch (QueryException $err) {
-            return response()->json(['erro' => 'Erro na criação'], 500);
+            return response()->json(['erro' => 'Erro na criação: ' . $err->getMessage()], 500);
         }
     }
 

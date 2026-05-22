@@ -8,8 +8,40 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
+use App\Models\portaria;
+
 class PortariaController extends Controller
 {
+    public function validar($id)
+    {
+        $portaria = portaria::where('AUT_ID', $id)->first();
+        
+        if ($portaria) {
+            $portaria->update(['PORT_validate' => true]);
+            
+            $aut = autorizacao::find($id);
+            $nome = $aut->AUT_alunoname;
+            $tipo = $aut->AUT_type;
+
+            // Log de Notificação
+            Log::info("SAFE ALERTA: O aluno {$nome} realizou a {$tipo} na portaria às " . now()->toDateTimeString());
+
+            // Disparo de e-mail integrado ao Mailpit
+            try {
+                Mail::raw("Olá, informamos que o aluno {$nome} acabou de registrar sua {$tipo} na portaria da instituição.", function ($message) use ($nome, $tipo) {
+                    $message->to('responsaveis@escola.com.br')
+                            ->subject("SAFE: Notificação de Segurança - {$tipo} de {$nome}");
+                });
+            } catch (\Exception $e) {
+                Log::error("Erro ao enviar e-mail: " . $e->getMessage());
+            }
+
+            return response()->json(['message' => 'Movimentação validada e notificações enviadas!']);
+        }
+
+        return response()->json(['message' => 'Autorização não encontrada'], 404);
+    }
+
     public function store(Request $request)
     {
         // 1. Valida a requisição vinda do Svelte
