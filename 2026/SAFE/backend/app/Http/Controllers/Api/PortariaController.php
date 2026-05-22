@@ -64,14 +64,7 @@ class PortariaController extends Controller
             }
         }
 
-        // 3. DESAFIO: Simulação de disparos de Notificação Nativa do Laravel
-
-        // A) Geração de Log::info (Simulando push de log / WhatsApp no terminal)
-        Log::info("SAFE ALERTA: O aluno {$nome} realizou a {$tipo} na portaria do SENAI às " . now()->toDateTimeString());
-
-        // B) Disparo de e-mail integrado ao Mailpit para simulação real
-        // Caso queira criar uma Mailable class futuramente: php artisan make:mail AlertaPortaria
-        Mail::raw("Olá, informamos que o aluno {$nome} acabou de registrar sua {$tipo} na portaria da instituição.", function ($message) use ($nome, $tipo) {
+        Mail::raw("Olá, informamos que o aluno {$nome} acabou de registrar sua {$tipo}  instituição.", function ($message) use ($nome, $tipo) {
             $message->to('responsaveis@escola.com.br')
                     ->subject("SAFE: Notificação de Segurança - {$tipo} de {$nome}");
         });
