@@ -85,6 +85,7 @@
         {/if}
     </div>
 
+<<<<<<< HEAD
     <!-- HISTÓRICO DE MOVIMENTAÇÕES -->
     <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-gray-400">
         <h2 class="text-xl font-bold text-gray-800 mb-4 text-left">Histórico de Movimentações (Hoje)</h2>
@@ -126,4 +127,44 @@
             </div>
         {/if}
     </div>
+=======
+    {#if autorizacoes.length === 0}
+        <div class="text-center py-20 bg-gray-50 rounded-lg border-2 border-dashed">
+            <p class="text-gray-400 text-lg">Nenhum aluno aguardando liberação no momento.</p>
+        </div>
+    {:else}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {#each autorizacoes as aut}
+                <div class="p-4 border rounded-lg shadow-sm bg-white flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="px-2 py-1 rounded text-[10px] font-bold uppercase {aut.AUT_type === 'saida' ? 'bg-orange-100 text-orange-700' : 'bg-red-100 text-red-700'}">
+                                {aut.AUT_type === 'saida' ? 'Saída' : 'Entrada'}
+                            </span>
+                            <span class="text-[10px] text-gray-400">{new Date(aut.AUT_time).toLocaleString()}</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800">{aut.AUT_alunoname}</h3>
+                        <p class="text-sm text-gray-600">Turma: <span class="font-semibold">{aut.AUT_alunoclass}</span></p>
+                        <p class="text-xs text-gray-500 mt-1">Autorizado por: {aut.AUT_nameaqv}</p>
+                        
+                        {#if aut.AUT_signature_image}
+                            <div class="mt-3 p-2 bg-gray-50 rounded border border-gray-100">
+                                <p class="text-[9px] text-gray-400 uppercase mb-1">Assinatura AQV:</p>
+                                <img src={aut.AUT_signature_image} alt="Assinatura" class="h-12 object-contain mix-blend-multiply" />
+                            </div>
+                        {/if}
+                    </div>
+
+                    <button 
+                        onclick={() => validar(aut.id)}
+                        class="mt-4 w-full bg-green-600 text-white py-2 rounded font-bold hover:bg-green-700 transition shadow-sm active:transform active:scale-95"
+                    >
+                        CONFIRMAR PASSAGEM
+                    </button>
+                </div>
+            {/each}
+        </div>
+    {/if}
+
+>>>>>>> 295e65726d6c784a629db3b5228041309e29c18b
 </div>
