@@ -4,10 +4,6 @@
     import './layout.css';
 
     let { children } = $props();
-
-    onMount(() => {
-        auth.init();
-    });
 </script>
 
 <div class="min-h-screen bg-gray-50 font-sans">
