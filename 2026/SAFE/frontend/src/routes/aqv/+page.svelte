@@ -25,71 +25,18 @@
         autorizacoes = await apiFetch('/autorizacoes');
     }
 
-    let signatureCanvas: HTMLCanvasElement;
-    let ctx: CanvasRenderingContext2D;
-    let drawing = false;
-
-    onMount(() => {
-        loadAutorizacoes();
-        ctx = signatureCanvas.getContext('2d')!;
-        ctx.lineWidth = 2;
-        ctx.lineCap = 'round';
-        ctx.strokeStyle = '#000';
-    });
-
-    function startDrawing(e: MouseEvent | TouchEvent) {
-        drawing = true;
-        const rect = signatureCanvas.getBoundingClientRect();
-        
-        let x, y;
-        if ('touches' in e) {
-            x = e.touches[0].clientX - rect.left;
-            y = e.touches[0].clientY - rect.top;
-        } else {
-            x = e.offsetX;
-            y = e.offsetY;
-        }
-        
-        ctx.beginPath();
-        ctx.moveTo(x, y);
-    }
-
-    function draw(e: MouseEvent | TouchEvent) {
-        if (!drawing) return;
-        const rect = signatureCanvas.getBoundingClientRect();
-        
-        let x, y;
-        if ('touches' in e) {
-            x = e.touches[0].clientX - rect.left;
-            y = e.touches[0].clientY - rect.top;
-        } else {
-            x = e.offsetX;
-            y = e.offsetY;
-        }
-        
-        ctx.lineTo(x, y);
-        ctx.stroke();
-    }
-
-    function stopDrawing() {
-        drawing = false;
-    }
-
-    function clearSignature() {
-        ctx.clearRect(0, 0, signatureCanvas.width, signatureCanvas.height);
-    }
+    onMount(loadAutorizacoes);
 
     async function handleSubmit() {
         loading = true;
         try {
-            const signatureData = signatureCanvas.toDataURL('image/png');
             await apiFetch('/autorizacoes', 'POST', {
                 AUT_alunoname: alunoname,
                 AUT_alunoclass: alunoclass,
                 AUT_type: type,
                 AUT_teacher_email: teacher_email,
                 AUT_time: aut_time,
-                AUT_signature_image: signatureData,
+                AUT_signature_image: signature,
                 AUT_fouls: fouls,
                 AUT_nameaqv: auth.user.name
             });
@@ -97,7 +44,7 @@
             alunoname = '';
             alunoclass = '';
             teacher_email = '';
-            clearSignature();
+            signature = '';
             loadAutorizacoes();
             setTimeout(() => success = false, 3000);
         } catch (e) {
@@ -163,23 +110,14 @@
             </div>
 
             <div>
-                <div class="flex justify-between items-center mb-1">
-                    <label for="signature" class="block text-sm font-medium text-gray-700">Assinatura Digital (AQV)</label>
-                    <button type="button" onclick={clearSignature} class="text-xs text-red-500 hover:underline">Limpar</button>
-                </div>
-                <canvas 
-                    bind:this={signatureCanvas}
-                    width="800"
-                    height="200"
-                    class="w-full border-2 border-dashed border-gray-300 rounded bg-white cursor-crosshair"
-                    onmousedown={startDrawing}
-                    onmousemove={draw}
-                    onmouseup={stopDrawing}
-                    onmouseleave={stopDrawing}
-                    ontouchstart={startDrawing}
-                    ontouchmove={draw}
-                    ontouchend={stopDrawing}
-                ></canvas>
+                <label for="signature" class="block text-sm font-medium text-gray-700">Assinatura Digital (AQV)</label>
+                <input 
+                    id="signature" 
+                    bind:value={signature} 
+                    placeholder="Digite seu nome para assinar" 
+                    class="w-full mt-1 p-2 border rounded bg-yellow-50 font-serif italic text-lg focus:ring-2 focus:ring-red-500 outline-none" 
+                />
+                <p class="text-[10px] text-gray-400 mt-1 italic">* Ao digitar seu nome, você confirma a veracidade desta autorização.</p>
             </div>
 
             <button type="submit" disabled={loading}
