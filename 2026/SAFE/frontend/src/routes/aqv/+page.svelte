@@ -25,18 +25,55 @@
         autorizacoes = await apiFetch('/autorizacoes');
     }
 
-    onMount(loadAutorizacoes);
+    let signatureCanvas: HTMLCanvasElement;
+    let ctx: CanvasRenderingContext2D;
+    let drawing = false;
+
+    onMount(() => {
+        loadAutorizacoes();
+        ctx = signatureCanvas.getContext('2d')!;
+        ctx.lineWidth = 2;
+        ctx.lineCap = 'round';
+        ctx.strokeStyle = '#000';
+    });
+
+    function startDrawing(e: MouseEvent | TouchEvent) {
+        drawing = true;
+        const rect = signatureCanvas.getBoundingClientRect();
+        const x = ('touches' in e ? e.touches[0].clientX : e.clientX) - rect.left;
+        const y = ('touches' in e ? e.touches[0].clientY : e.clientY) - rect.top;
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+    }
+
+    function draw(e: MouseEvent | TouchEvent) {
+        if (!drawing) return;
+        const rect = signatureCanvas.getBoundingClientRect();
+        const x = ('touches' in e ? e.touches[0].clientX : e.clientX) - rect.left;
+        const y = ('touches' in e ? e.touches[0].clientY : e.clientY) - rect.top;
+        ctx.lineTo(x, y);
+        ctx.stroke();
+    }
+
+    function stopDrawing() {
+        drawing = false;
+    }
+
+    function clearSignature() {
+        ctx.clearRect(0, 0, signatureCanvas.width, signatureCanvas.height);
+    }
 
     async function handleSubmit() {
         loading = true;
         try {
+            const signatureData = signatureCanvas.toDataURL('image/png');
             await apiFetch('/autorizacoes', 'POST', {
                 AUT_alunoname: alunoname,
                 AUT_alunoclass: alunoclass,
                 AUT_type: type,
                 AUT_teacher_email: teacher_email,
                 AUT_time: aut_time,
-                AUT_signature_image: signature || 'assinatura_digital_v01',
+                AUT_signature_image: signatureData,
                 AUT_fouls: fouls,
                 AUT_nameaqv: auth.user.name
             });
@@ -44,7 +81,7 @@
             alunoname = '';
             alunoclass = '';
             teacher_email = '';
-            signature = '';
+            clearSignature();
             loadAutorizacoes();
             setTimeout(() => success = false, 3000);
         } catch (e) {
@@ -110,8 +147,23 @@
             </div>
 
             <div>
-                <label for="signature" class="block text-sm font-medium text-gray-700">Assinatura Digital (AQV)</label>
-                <textarea id="signature" bind:value={signature} placeholder="Assine aqui (Texto ou Base64)" rows="2" class="w-full mt-1 p-2 border rounded bg-yellow-50 font-serif italic focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
+                <div class="flex justify-between items-center mb-1">
+                    <label for="signature" class="block text-sm font-medium text-gray-700">Assinatura Digital (AQV)</label>
+                    <button type="button" onclick={clearSignature} class="text-xs text-red-500 hover:underline">Limpar</button>
+                </div>
+                <canvas 
+                    bind:this={signatureCanvas}
+                    width="600"
+                    height="150"
+                    class="w-full border-2 border-dashed border-gray-300 rounded bg-white cursor-crosshair"
+                    onmousedown={startDrawing}
+                    onmousemove={draw}
+                    onmouseup={stopDrawing}
+                    onmouseleave={stopDrawing}
+                    ontouchstart={startDrawing}
+                    ontouchmove={draw}
+                    ontouchend={stopDrawing}
+                ></canvas>
             </div>
 
             <button type="submit" disabled={loading}

@@ -6,11 +6,20 @@
     let loading = $state(false);
 
     async function load() {
-        const data = await apiFetch('/autorizacoes');
-        autorizacoes = data.filter((a: any) => !a.portaria?.PORT_validate);
+        try {
+            const data = await apiFetch('/autorizacoes');
+            // Filtramos apenas as que NÃO foram validadas ainda
+            autorizacoes = data.filter((a: any) => !a.portaria || a.portaria.PORT_validate === 0 || a.portaria.PORT_validate === false);
+        } catch (e) {
+            console.error('Erro ao carregar autorizações:', e);
+        }
     }
 
-    onMount(load);
+    onMount(() => {
+        load();
+        const interval = setInterval(load, 5000); // Atualiza a cada 5 segundos
+        return () => clearInterval(interval);
+    });
 
     async function validar(id: number) {
         try {
@@ -22,53 +31,57 @@
     }
 </script>
 
-<div class="bg-white p-6 rounded-lg shadow max-w-4xl mx-auto">
+<div class="bg-white p-6 rounded-lg shadow max-w-5xl mx-auto">
     <div class="flex justify-between items-center mb-6">
-        <h2 class="text-2xl font-bold">Fila de Liberação (Portaria)</h2>
-        <button onclick={load} class="text-blue-600 text-sm hover:underline">Atualizar Lista</button>
+        <div>
+            <h2 class="text-2xl font-bold text-gray-800">Fila de Liberação (Portaria)</h2>
+            <p class="text-sm text-gray-500 text-left">Alunos aguardando validação para entrada ou saída.</p>
+        </div>
+        <button onclick={load} class="bg-blue-50 text-blue-600 px-4 py-2 rounded-md text-sm font-semibold hover:bg-blue-100 transition border border-blue-100">
+            🔄 Atualizar Fila
+        </button>
     </div>
 
     {#if autorizacoes.length === 0}
-        <p class="text-center text-gray-500 py-10">Nenhum aluno aguardando liberação no momento.</p>
+        <div class="text-center py-20 bg-gray-50 rounded-lg border-2 border-dashed">
+            <p class="text-gray-400 text-lg">Nenhum aluno aguardando liberação no momento.</p>
+        </div>
     {:else}
-        <div class="overflow-x-auto">
-            <table class="w-full text-left">
-                <thead>
-                    <tr class="border-b bg-gray-50 text-xs uppercase text-gray-600">
-                        <th class="p-3">Aluno</th>
-                        <th class="p-3">Turma</th>
-                        <th class="p-3">Tipo</th>
-                        <th class="p-3">AQV Responsável</th>
-                        <th class="p-3">Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {#each autorizacoes as aut}
-                        <tr class="border-b hover:bg-gray-50">
-                            <td class="p-3 font-medium">{aut.AUT_alunoname}</td>
-                            <td class="p-3">{aut.AUT_alunoclass}</td>
-                            <td class="p-3">
-                                <span class="px-2 py-1 rounded text-xs {aut.AUT_type === 'saida' ? 'bg-orange-100 text-orange-700' : 'bg-blue-100 text-blue-700'}">
-                                    {aut.AUT_type.toUpperCase()}
-                                </span>
-                            </td>
-                            <td class="p-3 text-sm text-gray-600">{aut.AUT_nameaqv}</td>
-                            <td class="p-3">
-                                <button 
-                                    onclick={() => validar(aut.id)}
-                                    class="bg-green-600 text-white px-4 py-1 rounded text-sm hover:bg-green-700 transition"
-                                >
-                                    Validar Entrada/Saída
-                                </button>
-                            </td>
-                        </tr>
-                    {/each}
-                </tbody>
-            </table>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {#each autorizacoes as aut}
+                <div class="p-4 border rounded-lg shadow-sm bg-white flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="px-2 py-1 rounded text-[10px] font-bold uppercase {aut.AUT_type === 'saida' ? 'bg-orange-100 text-orange-700' : 'bg-blue-100 text-blue-700'}">
+                                {aut.AUT_type === 'saida' ? 'Saída' : 'Entrada'}
+                            </span>
+                            <span class="text-[10px] text-gray-400">{new Date(aut.AUT_time).toLocaleString()}</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800">{aut.AUT_alunoname}</h3>
+                        <p class="text-sm text-gray-600">Turma: <span class="font-semibold">{aut.AUT_alunoclass}</span></p>
+                        <p class="text-xs text-gray-500 mt-1">Autorizado por: {aut.AUT_nameaqv}</p>
+                        
+                        {#if aut.AUT_signature_image}
+                            <div class="mt-3 p-2 bg-gray-50 rounded border border-gray-100">
+                                <p class="text-[9px] text-gray-400 uppercase mb-1">Assinatura AQV:</p>
+                                <img src={aut.AUT_signature_image} alt="Assinatura" class="h-12 object-contain mix-blend-multiply" />
+                            </div>
+                        {/if}
+                    </div>
+
+                    <button 
+                        onclick={() => validar(aut.id)}
+                        class="mt-4 w-full bg-green-600 text-white py-2 rounded font-bold hover:bg-green-700 transition shadow-sm active:transform active:scale-95"
+                    >
+                        CONFIRMAR PASSAGEM
+                    </button>
+                </div>
+            {/each}
         </div>
     {/if}
     
-    <div class="mt-8 p-4 bg-blue-50 border border-blue-200 rounded text-sm text-blue-800">
-        <strong>Dica de Segurança:</strong> Ao validar, uma notificação automática (WhatsApp/E-mail) é disparada para o responsável através do sistema.
+    <div class="mt-8 p-4 bg-yellow-50 border border-yellow-200 rounded text-sm text-yellow-800 flex items-center gap-3">
+        <span class="text-xl">📢</span>
+        <p><strong>Atenção:</strong> Ao confirmar, o sistema enviará automaticamente um log de notificação para os responsáveis através do servidor Laravel.</p>
     </div>
 </div>
