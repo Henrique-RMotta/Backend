@@ -41,6 +41,16 @@ class AutorizacoesController extends Controller
             // Garantir que campos extras do front sejam salvos
             $validated['AUT_signature_name'] = $request->AUT_nameaqv ?? 'AQV';
             
+            // CONVERSÃO: Transformar o array de faltas em string JSON para o banco
+            if (isset($validated['AUT_fouls'])) {
+                $validated['AUT_fouls'] = json_encode($validated['AUT_fouls']);
+            }
+
+            // FORMATAÇÃO: Garantir que a data do Svelte seja aceita pelo MySQL
+            if (isset($validated['AUT_time'])) {
+                $validated['AUT_time'] = date('Y-m-d H:i:s', strtotime($validated['AUT_time']));
+            }
+            
             $aut = autorizacao::create($validated);
             
             // Cria o registro na portaria vinculado a esta autorização
