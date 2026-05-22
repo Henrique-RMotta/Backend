@@ -43,7 +43,7 @@
                 <p class="text-sm text-gray-500">Alunos com pré-autorização aguardando passagem.</p>
             </div>
             <button onclick={load} class="bg-red-50 text-red-600 px-4 py-2 rounded-md text-sm font-semibold hover:bg-red-100 transition border border-red-100">
-                🔄 Atualizar Fila
+                Atualizar Fila
             </button>
         </div>
 
