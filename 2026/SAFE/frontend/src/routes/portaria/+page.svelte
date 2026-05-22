@@ -37,7 +37,7 @@
             <h2 class="text-2xl font-bold text-gray-800">Fila de Liberação (Portaria)</h2>
             <p class="text-sm text-gray-500 text-left">Alunos aguardando validação para entrada ou saída.</p>
         </div>
-        <button onclick={load} class="bg-blue-50 text-blue-600 px-4 py-2 rounded-md text-sm font-semibold hover:bg-blue-100 transition border border-blue-100">
+        <button onclick={load} class="bg-red-50 text-red-600 px-4 py-2 rounded-md text-sm font-semibold hover:bg-red-100 transition border border-red-100">
             🔄 Atualizar Fila
         </button>
     </div>
@@ -52,7 +52,7 @@
                 <div class="p-4 border rounded-lg shadow-sm bg-white flex flex-col justify-between">
                     <div>
                         <div class="flex justify-between items-start mb-2">
-                            <span class="px-2 py-1 rounded text-[10px] font-bold uppercase {aut.AUT_type === 'saida' ? 'bg-orange-100 text-orange-700' : 'bg-blue-100 text-blue-700'}">
+                            <span class="px-2 py-1 rounded text-[10px] font-bold uppercase {aut.AUT_type === 'saida' ? 'bg-orange-100 text-orange-700' : 'bg-red-100 text-red-700'}">
                                 {aut.AUT_type === 'saida' ? 'Saída' : 'Entrada'}
                             </span>
                             <span class="text-[10px] text-gray-400">{new Date(aut.AUT_time).toLocaleString()}</span>

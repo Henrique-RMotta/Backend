@@ -40,8 +40,16 @@
     function startDrawing(e: MouseEvent | TouchEvent) {
         drawing = true;
         const rect = signatureCanvas.getBoundingClientRect();
-        const x = ('touches' in e ? e.touches[0].clientX : e.clientX) - rect.left;
-        const y = ('touches' in e ? e.touches[0].clientY : e.clientY) - rect.top;
+        
+        let x, y;
+        if ('touches' in e) {
+            x = e.touches[0].clientX - rect.left;
+            y = e.touches[0].clientY - rect.top;
+        } else {
+            x = e.offsetX;
+            y = e.offsetY;
+        }
+        
         ctx.beginPath();
         ctx.moveTo(x, y);
     }
@@ -49,8 +57,16 @@
     function draw(e: MouseEvent | TouchEvent) {
         if (!drawing) return;
         const rect = signatureCanvas.getBoundingClientRect();
-        const x = ('touches' in e ? e.touches[0].clientX : e.clientX) - rect.left;
-        const y = ('touches' in e ? e.touches[0].clientY : e.clientY) - rect.top;
+        
+        let x, y;
+        if ('touches' in e) {
+            x = e.touches[0].clientX - rect.left;
+            y = e.touches[0].clientY - rect.top;
+        } else {
+            x = e.offsetX;
+            y = e.offsetY;
+        }
+        
         ctx.lineTo(x, y);
         ctx.stroke();
     }
@@ -95,7 +111,7 @@
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
     <!-- Formulário -->
     <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow">
-        <h2 class="text-xl font-bold mb-4 text-blue-800 border-b pb-2">Nova Pré-Autorização</h2>
+        <h2 class="text-xl font-bold mb-4 text-red-700 border-b pb-2">Nova Pré-Autorização</h2>
         
         {#if success}
             <div class="bg-green-100 text-green-700 p-3 rounded mb-4 shadow-sm border border-green-200">
@@ -107,31 +123,31 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label for="alunoname" class="block text-sm font-medium text-gray-700">Nome do Aluno</label>
-                    <input id="alunoname" bind:value={alunoname} required class="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-blue-500 outline-none" />
+                    <input id="alunoname" bind:value={alunoname} required class="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-red-500 outline-none" />
                 </div>
                 <div>
                     <label for="alunoclass" class="block text-sm font-medium text-gray-700">Turma</label>
-                    <input id="alunoclass" bind:value={alunoclass} required class="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-blue-500 outline-none" />
+                    <input id="alunoclass" bind:value={alunoclass} required class="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-red-500 outline-none" />
                 </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label for="type" class="block text-sm font-medium text-gray-700">Tipo de Fluxo</label>
-                    <select id="type" bind:value={type} class="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-blue-500 outline-none">
+                    <select id="type" bind:value={type} class="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-red-500 outline-none">
                         <option value="saida">Saída Antecipada</option>
                         <option value="entrada">Entrada Tardia</option>
                     </select>
                 </div>
                 <div>
                     <label for="aut_time" class="block text-sm font-medium text-gray-700">Horário Previsto</label>
-                    <input id="aut_time" type="datetime-local" bind:value={aut_time} required class="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-blue-500 outline-none" />
+                    <input id="aut_time" type="datetime-local" bind:value={aut_time} required class="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-red-500 outline-none" />
                 </div>
             </div>
 
             <div>
                 <label for="teacher_email" class="block text-sm font-medium text-gray-700">E-mail do Professor (Sala)</label>
-                <input id="teacher_email" type="email" bind:value={teacher_email} placeholder="professor@escola.com" class="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-blue-500 outline-none" />
+                <input id="teacher_email" type="email" bind:value={teacher_email} placeholder="professor@escola.com" class="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-red-500 outline-none" />
             </div>
 
             <div class="bg-gray-50 p-4 rounded-md border">
@@ -139,7 +155,7 @@
                 <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
                     {#each Object.keys(fouls) as foul}
                         <label class="flex items-center space-x-2 cursor-pointer">
-                            <input type="checkbox" bind:checked={fouls[foul]} class="rounded text-blue-600 focus:ring-blue-500" />
+                            <input type="checkbox" bind:checked={fouls[foul]} class="rounded text-red-600 focus:ring-red-500" />
                             <span class="text-sm text-gray-600">{foul.replace('falta', 'Aula ')}</span>
                         </label>
                     {/each}
@@ -153,8 +169,8 @@
                 </div>
                 <canvas 
                     bind:this={signatureCanvas}
-                    width="600"
-                    height="150"
+                    width="800"
+                    height="200"
                     class="w-full border-2 border-dashed border-gray-300 rounded bg-white cursor-crosshair"
                     onmousedown={startDrawing}
                     onmousemove={draw}
@@ -167,7 +183,7 @@
             </div>
 
             <button type="submit" disabled={loading}
-                class="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition shadow-md disabled:opacity-50">
+                class="w-full bg-red-600 text-white py-3 rounded-lg font-bold hover:bg-red-700 transition shadow-md disabled:opacity-50">
                 {loading ? 'Processando...' : 'FINALIZAR E ENVIAR PARA PORTARIA'}
             </button>
         </form>

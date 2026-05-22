@@ -37,15 +37,15 @@
         <div>
             <label for="email" class="block text-sm font-medium text-gray-700">E-mail</label>
             <input id="email" type="email" bind:value={email} required
-                class="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-blue-500 outline-none" />
+                class="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-red-500 outline-none" />
         </div>
         <div>
             <label for="password" class="block text-sm font-medium text-gray-700">Senha</label>
             <input id="password" type="password" bind:value={password} required
-                class="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-blue-500 outline-none" />
+                class="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-red-500 outline-none" />
         </div>
         <button type="submit" disabled={loading}
-            class="w-full bg-blue-600 text-white py-2 rounded font-semibold hover:bg-blue-700 transition disabled:opacity-50">
+            class="w-full bg-red-600 text-white py-2 rounded font-semibold hover:bg-red-700 transition disabled:opacity-50">
             {loading ? 'Entrando...' : 'Acessar Sistema'}
         </button>
     </form>
