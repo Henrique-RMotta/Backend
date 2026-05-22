@@ -79,9 +79,5 @@
             {/each}
         </div>
     {/if}
-    
-    <div class="mt-8 p-4 bg-yellow-50 border border-yellow-200 rounded text-sm text-yellow-800 flex items-center gap-3">
-        <span class="text-xl">📢</span>
-        <p><strong>Atenção:</strong> Ao confirmar, o sistema enviará automaticamente um log de notificação para os responsáveis através do servidor Laravel.</p>
-    </div>
+
 </div>
