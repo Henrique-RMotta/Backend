@@ -50,16 +50,16 @@
 
         <form onsubmit={(e) => { e.preventDefault(); handleSubmit(); }} class="space-y-4">
             <div>
-                <label class="block text-sm font-medium">Nome do Aluno</label>
-                <input bind:value={alunoname} required class="w-full p-2 border rounded" />
+                <label for="alunoname" class="block text-sm font-medium">Nome do Aluno</label>
+                <input id="alunoname" bind:value={alunoname} required class="w-full p-2 border rounded" />
             </div>
             <div>
-                <label class="block text-sm font-medium">Turma</label>
-                <input bind:value={alunoclass} required class="w-full p-2 border rounded" />
+                <label for="alunoclass" class="block text-sm font-medium">Turma</label>
+                <input id="alunoclass" bind:value={alunoclass} required class="w-full p-2 border rounded" />
             </div>
             <div>
-                <label class="block text-sm font-medium">Tipo de Fluxo</label>
-                <select bind:value={type} class="w-full p-2 border rounded">
+                <label for="type" class="block text-sm font-medium">Tipo de Fluxo</label>
+                <select id="type" bind:value={type} class="w-full p-2 border rounded">
                     <option value="saida">Saída Antecipada</option>
                     <option value="entrada">Entrada Tardia</option>
                 </select>

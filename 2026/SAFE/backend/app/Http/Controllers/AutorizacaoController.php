@@ -16,14 +16,14 @@ class AutorizacaoController extends Controller
 
     public function store(Request $request)
     {
-        $autorizacao = Autorizacao::create([
-            'AUT_alunoname' => $request->AUT_alunoname,
-            'AUT_alunoclass' => $request->AUT_alunoclass,
-            'AUT_type' => $request->AUT_type,
-            'AUT_nameaqv' => $request->AUT_nameaqv,
-            'AUT_signature_image' => $request->AUT_signature_image ?? 'assinatura_vazia',
-            'AUT_time' => now(),
-        ]);
+        $autorizacao = new Autorizacao();
+        $autorizacao->AUT_alunoname = $request->AUT_alunoname;
+        $autorizacao->AUT_alunoclass = $request->AUT_alunoclass;
+        $autorizacao->AUT_type = $request->AUT_type;
+        $autorizacao->AUT_nameaqv = $request->AUT_nameaqv;
+        $autorizacao->AUT_signature_image = $request->AUT_signature_image ?? 'assinatura_vazia';
+        $autorizacao->AUT_time = now();
+        $autorizacao->save();
 
         Portaria::create(['AUT_ID' => $autorizacao->id]);
 
