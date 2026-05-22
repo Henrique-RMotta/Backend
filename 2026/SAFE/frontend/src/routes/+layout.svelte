@@ -1,5 +1,6 @@
 <script lang="ts">
     import { auth } from '$lib/auth.svelte';
+    import { onMount } from 'svelte';
     import './layout.css';
 
     let { children } = $props();
